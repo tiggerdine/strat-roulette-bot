@@ -1,8 +1,16 @@
 import os
 
 import discord
+from flask import Flask
 
 from scraper import get_strat
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
 
 
 class StratRouletteBot(discord.Client):
