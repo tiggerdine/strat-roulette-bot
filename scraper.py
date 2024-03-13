@@ -20,8 +20,8 @@ def get_strat(map, side):
     return {"title": title.text, "desc": desc.text}
 
 
-for i in range(10):
-    strat = get_strat("dust2", "T")
-    print(strat)
+# for i in range(10):
+#     strat = get_strat("dust2", "T")
+#     print(strat)
 
-driver.quit()
+# driver.quit()
