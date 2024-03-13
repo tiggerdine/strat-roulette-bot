@@ -9,6 +9,7 @@ driver.get("https://strat-roulette.github.io")
 ct_strat_button = driver.find_element(By.XPATH, "//button[text()='CT Strat']")
 
 
+# TODO get_strat(map, side)
 def get_strat():
     ct_strat_button.click()
     title = driver.find_element(By.ID, "title")
