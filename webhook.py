@@ -55,3 +55,7 @@ def get_map(data):
 
 def get_team(data):
     return data["player"]["team"]
+
+
+if __name__ == '__main__':
+    app.run()

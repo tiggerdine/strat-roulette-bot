@@ -20,8 +20,9 @@ def get_strat(map, team):
     return {"title": title.text, "desc": desc.text}
 
 
-# for i in range(10):
-#     strat = get_strat("dust2", "T")
-#     print(strat)
+if __name__ == '__main__':
+    for i in range(10):
+        strat = get_strat("dust2", "T")
+        print(strat)
 
-# driver.quit()
+    driver.quit()
