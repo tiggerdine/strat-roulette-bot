@@ -8,9 +8,9 @@ driver = webdriver.Chrome(options=options)
 driver.get("https://strat-roulette.github.io")
 
 
-def get_strat(map, team):
+def get_strat(mapp, team):
     try:
-        driver.find_element(By.XPATH, "//input[@value='{}']".format(map)).click()
+        driver.find_element(By.XPATH, "//input[@value='{}']".format(mapp)).click()
     except NoSuchElementException:
         driver.find_element(By.XPATH, "//input[@value='null']").click()
 

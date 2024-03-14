@@ -20,9 +20,9 @@ webhook = SyncWebhook.partial(webhook_id, webhook_token)
 def _():
     data = request.get_json()
     if is_freezetime(data):
-        map = get_map(data)
+        mapp = get_map(data)
         team = get_team(data)
-        strat = get_strat(map, team)
+        strat = get_strat(mapp, team)
         webhook.send(strat)
     return ""
 
