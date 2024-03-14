@@ -20,7 +20,7 @@ def get_strat(map, team):
     return {"title": title.text, "desc": desc.text}
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     for i in range(10):
         strat = get_strat("dust2", "T")
         print(strat)

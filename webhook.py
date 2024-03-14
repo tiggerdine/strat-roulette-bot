@@ -1,13 +1,19 @@
+import configparser
+import os
+
 from discord import SyncWebhook
 from flask import Flask, request
-import os
 
 from strats import get_strat
 
+config = configparser.ConfigParser()
+config.read("config.ini")
+
 app = Flask(__name__)
 
-token = os.environ.get("STRAT_ROULETTE_WEBHOOK_TOKEN")
-webhook = SyncWebhook.partial(1217503787485368461, token)
+webhook_id = config.getint("Webhook", "id")
+webhook_token = config.get("Webhook", "token", vars=os.environ)
+webhook = SyncWebhook.partial(webhook_id, webhook_token)
 
 
 @app.route("/", methods=["POST"])
@@ -57,5 +63,5 @@ def get_team(data):
     return data["player"]["team"]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
