@@ -3,7 +3,7 @@ from discord import Webhook
 from flask import Flask, request
 import os
 
-from scraper import get_strat
+from strats import get_strat
 
 app = Flask(__name__)
 token = os.environ.get("STRAT_ROULETTE_WEBHOOK_TOKEN")
