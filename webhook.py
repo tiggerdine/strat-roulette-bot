@@ -1,30 +1,26 @@
-import os
-
-import discord
+import aiohttp
+from discord import Webhook
 from flask import Flask, request
+import os
 
 from scraper import get_strat
 
-
-class StratRouletteBot(discord.Client):
-    async def on_ready(self):
-        strat = get_strat("???", "CT")
-        channel = self.get_channel(1217427654098026600)
-        await channel.send(strat)
-
-
-bot = StratRouletteBot(intents=None)
-token = os.environ.get("STRAT_ROULETTE_BOT_TOKEN")
-bot.run(token)
-
 app = Flask(__name__)
+token = os.environ.get("STRAT_ROULETTE_WEBHOOK_TOKEN")
 
 
 @app.route("/", methods=["POST"])
-def consume():
+async def post():
     data = request.get_json()
     if is_freezetime(data):
-        print("freezetime")
+        strat = get_strat("???", "CT")
+        async with aiohttp.ClientSession() as session:
+            webhook = Webhook.partial(
+                1217503787485368461,
+                token,
+                session=session,
+            )
+            await webhook.send(strat)
     return ""
 
 
