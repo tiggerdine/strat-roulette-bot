@@ -11,7 +11,7 @@ webhook = SyncWebhook.partial(1217503787485368461, token)
 
 
 @app.route("/", methods=["POST"])
-async def handle():
+def _():
     data = request.get_json()
     if is_freezetime(data):
         map = get_map(data)
