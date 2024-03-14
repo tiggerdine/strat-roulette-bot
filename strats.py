@@ -8,13 +8,13 @@ driver = webdriver.Chrome(options=options)
 driver.get("https://strat-roulette.github.io")
 
 
-def get_strat(map, side):
+def get_strat(map, team):
     try:
         driver.find_element(By.XPATH, "//input[@value='{}']".format(map)).click()
     except NoSuchElementException:
         driver.find_element(By.XPATH, "//input[@value='null']").click()
 
-    driver.find_element(By.XPATH, "//button[text()='{} Strat']".format(side)).click()
+    driver.find_element(By.XPATH, "//button[text()='{} Strat']".format(team)).click()
     title = driver.find_element(By.ID, "title")
     desc = driver.find_element(By.ID, "desc")
     return {"title": title.text, "desc": desc.text}

@@ -14,7 +14,9 @@ webhook = SyncWebhook.partial(1217503787485368461, token)
 async def handle():
     data = request.get_json()
     if is_freezetime(data):
-        strat = get_strat("???", "CT")
+        map = get_map(data)
+        team = get_team(data)
+        strat = get_strat(map, team)
         webhook.send(strat)
     return ""
 
@@ -45,3 +47,11 @@ def is_short_freezetime(data):
             return True
     except KeyError:
         pass
+
+
+def get_map(data):
+    return str(data["map"]["name"]).removeprefix("de_")
+
+
+def get_team(data):
+    return data["player"]["team"]
