@@ -1,26 +1,21 @@
-import aiohttp
-from discord import Webhook
+from discord import SyncWebhook
 from flask import Flask, request
 import os
 
 from strats import get_strat
 
 app = Flask(__name__)
+
 token = os.environ.get("STRAT_ROULETTE_WEBHOOK_TOKEN")
+webhook = SyncWebhook.partial(1217503787485368461, token)
 
 
 @app.route("/", methods=["POST"])
-async def post():
+async def handle():
     data = request.get_json()
     if is_freezetime(data):
         strat = get_strat("???", "CT")
-        async with aiohttp.ClientSession() as session:
-            webhook = Webhook.partial(
-                1217503787485368461,
-                token,
-                session=session,
-            )
-            await webhook.send(strat)
+        webhook.send(strat)
     return ""
 
 
