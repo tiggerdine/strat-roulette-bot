@@ -7,7 +7,7 @@ from flask import Flask, request
 from strats import get_strat
 
 config = configparser.ConfigParser()
-config.read("config.ini")
+config.read("../config.ini")
 
 app = Flask(__name__)
 

@@ -4,7 +4,7 @@ import os
 import discord
 
 config = configparser.ConfigParser()
-config.read("config.ini")
+config.read("../config.ini")
 
 
 class StratRouletteBot(discord.Client):
