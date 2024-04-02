@@ -3,7 +3,10 @@ import os
 from threading import Thread
 
 import discord
+import nest_asyncio
 from flask import Flask
+
+nest_asyncio.apply()
 
 config = configparser.ConfigParser()
 config.read("../config.ini")
@@ -13,9 +16,8 @@ app = Flask(__name__)
 
 @app.post("/")
 async def _():
-    # FIXME RuntimeError: Timeout context manager should be used inside a task
-    await bot.send("...")
-    return ""
+    bot.loop.run_until_complete(bot.send("..."))
+    return "..."
 
 
 class StratRouletteBot(discord.Client):
@@ -37,4 +39,3 @@ if __name__ == "__main__":
     t1.start()
     t2.start()
     t1.join()
-    t2.join()
