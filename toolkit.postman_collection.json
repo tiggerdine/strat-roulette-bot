@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "3136eab1-dc30-47e0-a8f1-86127c98d75c",
+		"name": "Strat Roulette Bot Toolkit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Mock freezetime",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"map\": {\r\n        \"phase\": \"live\",\r\n        \"name\": \"de_cache\"\r\n    },\r\n    \"round\": {\r\n        \"phase\": \"freezetime\"\r\n    },\r\n    \"previously\": {\r\n        \"map\": {\r\n            \"phase\": \"\"\r\n        },\r\n        \"round\": {\r\n            \"phase\": \"over\"\r\n        }\r\n    },\r\n    \"player\": {\r\n        \"team\": \"T\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock freezetime after warmup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"map\": {\r\n        \"phase\": \"\"\r\n    },\r\n    \"round\": {\r\n        \"phase\": \"\"\r\n    },\r\n    \"previously\": {\r\n        \"map\": {\r\n            \"phase\": \"\"\r\n        },\r\n        \"round\": {\r\n            \"phase\": \"\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock freezetime after intermission",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"map\": {\r\n        \"phase\": \"\"\r\n    },\r\n    \"round\": {\r\n        \"phase\": \"\"\r\n    },\r\n    \"previously\": {\r\n        \"map\": {\r\n            \"phase\": \"\"\r\n        },\r\n        \"round\": {\r\n            \"phase\": \"\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000"
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.sendRequest(\"https://strat-roulette.github.io/\", function (err, response) {",
+					"    pm.expect(response).to.have.status(200)",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
