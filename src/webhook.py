@@ -16,7 +16,7 @@ webhook_token = config.get("Webhook", "token", vars=os.environ)
 webhook = SyncWebhook.partial(webhook_id, webhook_token)
 
 
-@app.route("/", methods=["POST"])
+@app.post("/")
 def _():
     data = request.get_json()
     if is_freezetime(data):

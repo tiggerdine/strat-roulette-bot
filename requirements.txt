@@ -1,4 +1,4 @@
 discord.py==2.3.2
-flask==3.0.2
+flask[async]==3.0.2
 requests==2.31.0
 selenium==4.18.1
