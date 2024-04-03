@@ -32,3 +32,11 @@ def get_map(data):
 
 def get_team(data):
     return data["player"]["team"]
+
+
+def verify_token(data, token):
+    try:
+        if data["auth"]["token"] == token:
+            return True
+    except KeyError:
+        pass
