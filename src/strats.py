@@ -15,7 +15,8 @@ def get_strat_if_freezetime(data):
         mapp = get_map(data)
         team = get_team(data)
         strat = get_strat(mapp, team)
-        return strat
+        formatted_strat = format_strat(strat)
+        return formatted_strat
 
 
 def get_strat(mapp, team):
@@ -28,6 +29,10 @@ def get_strat(mapp, team):
     title = driver.find_element(By.ID, "title")
     desc = driver.find_element(By.ID, "desc")
     return {"title": title.text, "desc": desc.text}
+
+
+def format_strat(strat):
+    return "# {}\n{}".format(strat["title"], strat["desc"])
 
 
 if __name__ == "__main__":
