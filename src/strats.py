@@ -36,3 +36,11 @@ if __name__ == "__main__":
         print(strat)
 
     driver.quit()
+
+
+def get_strat_if_freezetime(data):
+    if is_freezetime(data):
+        mapp = get_map(data)
+        team = get_team(data)
+        strat = get_strat(mapp, team)
+        return strat
