@@ -4,7 +4,9 @@ from threading import Thread
 
 import discord
 import nest_asyncio
-from flask import Flask
+from flask import Flask, request
+
+from strats import get_strat_if_freezetime
 
 nest_asyncio.apply()
 
@@ -16,8 +18,11 @@ app = Flask(__name__)
 
 @app.post("/")
 async def _():
-    bot.loop.run_until_complete(bot.send("..."))
-    return "..."
+    data = request.get_json()
+    strat = get_strat_if_freezetime(data)
+    if strat:
+        bot.loop.run_until_complete(bot.send(strat))
+    return ""
 
 
 class StratRouletteBot(discord.Client):

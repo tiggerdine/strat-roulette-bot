@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 
+from gsi import is_freezetime, get_map, get_team
+
 options = webdriver.ChromeOptions()
 options.add_argument("--headless=new")
 driver = webdriver.Chrome(options=options)
@@ -26,3 +28,11 @@ if __name__ == "__main__":
         print(strat)
 
     driver.quit()
+
+
+def get_strat_if_freezetime(data):
+    if is_freezetime(data):
+        mapp = get_map(data)
+        team = get_team(data)
+        strat = get_strat(mapp, team)
+        return strat
