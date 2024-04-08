@@ -23,7 +23,7 @@ class TestIsFreezetime(unittest.TestCase):
         for data in datas:
             self.assertTrue(is_freezetime(data))
 
-    def tset_is_not_long_freezetime(self):
+    def test_is_not_long_freezetime(self):
         # given
         datas = [
             {
