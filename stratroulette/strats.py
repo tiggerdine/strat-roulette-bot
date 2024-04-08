@@ -27,14 +27,22 @@ def get_strat_if_freezetime(data):
 
 def get_strat(mapp, team):
     try:
-        driver.find_element(By.XPATH, "//input[@value='{}']".format(mapp)).click()
+        find_map_button(mapp).click()
     except NoSuchElementException:
         driver.find_element(By.XPATH, "//input[@value='null']").click()
 
-    driver.find_element(By.XPATH, "//button[text()='{} Strat']".format(team)).click()
+    find_team_button(team).click()
     title = driver.find_element(By.ID, "title")
     desc = driver.find_element(By.ID, "desc")
     return {"title": title.text, "desc": desc.text}
+
+
+def find_map_button(mapp):
+    return driver.find_element(By.XPATH, "//input[@value='{}']".format(mapp))
+
+
+def find_team_button(team):
+    return driver.find_element(By.XPATH, "//button[text()='{} Strat']".format(team))
 
 
 def format_strat(strat):

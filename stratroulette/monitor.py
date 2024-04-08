@@ -2,11 +2,11 @@ import unittest
 
 from selenium.webdriver.common.by import By
 
-from stratroulette.strats import driver
+from stratroulette.strats import driver, find_map_button, find_team_button
 
 
 class Test(unittest.TestCase):
-    def test(self):
+    def test_maps(self):
         maps = [
             "mirage",
             "cache",
@@ -17,17 +17,21 @@ class Test(unittest.TestCase):
             "dust2",
             "null",
         ]
-        teams = ["CT", "T"]
 
         map_btns = driver.find_elements(By.XPATH, "//input[@name='map']")
         self.assertEqual(len(map_btns), len(maps))
-        for btn in map_btns:
-            self.assertIn(btn.get_property("value"), maps)
+
+        for mapp in maps:
+            find_map_button(mapp)
+
+    def test_teams(self):
+        teams = ["CT", "T"]
 
         team_btns = driver.find_elements(By.TAG_NAME, "button")
         self.assertEqual(len(team_btns), len(teams))
-        for btn in team_btns:
-            self.assertIn(btn.text.removesuffix(" Strat"), teams)
+
+        for team in teams:
+            find_team_button(team)
 
 
 if __name__ == "__main__":
