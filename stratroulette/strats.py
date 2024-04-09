@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 
-from gsi import is_freezetime, get_map, get_team, verify_token
+from stratroulette.gsi import is_freezetime, get_map, get_team, verify_token
 
 options = webdriver.ChromeOptions()
 options.add_argument("--headless=new")

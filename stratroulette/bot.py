@@ -6,7 +6,7 @@ import discord
 import nest_asyncio
 from flask import Flask, request
 
-from strats import get_strat_if_freezetime
+from stratroulette.strats import get_strat_if_freezetime
 
 nest_asyncio.apply()
 

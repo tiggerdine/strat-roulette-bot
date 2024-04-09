@@ -4,7 +4,7 @@ import os
 from discord import SyncWebhook
 from flask import Flask, request
 
-from strats import get_strat_if_freezetime
+from stratroulette.strats import get_strat_if_freezetime
 
 config = configparser.ConfigParser()
 config.read("../config.ini")
