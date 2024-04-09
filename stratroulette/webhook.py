@@ -7,6 +7,7 @@ from stratroulette.strats import get_strat_if_freezetime
 app = Flask(__name__)
 
 webhook = SyncWebhook.partial(webhook_id, webhook_token)
+webhook.send("Let's play Strat Roulette!")
 
 
 @app.post("/")
