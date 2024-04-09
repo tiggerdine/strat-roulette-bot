@@ -23,7 +23,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"map\": {\r\n        \"phase\": \"live\",\r\n        \"name\": \"de_cache\"\r\n    },\r\n    \"round\": {\r\n        \"phase\": \"freezetime\"\r\n    },\r\n    \"previously\": {\r\n        \"map\": {\r\n            \"phase\": \"\"\r\n        },\r\n        \"round\": {\r\n            \"phase\": \"over\"\r\n        }\r\n    },\r\n    \"player\": {\r\n        \"team\": \"T\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"auth\": {\r\n        \"token\": \"YR+D:s>37!!fgY:\"\r\n    },\r\n    \"map\": {\r\n        \"phase\": \"live\",\r\n        \"name\": \"de_cache\"\r\n    },\r\n    \"round\": {\r\n        \"phase\": \"freezetime\"\r\n    },\r\n    \"previously\": {\r\n        \"map\": {\r\n            \"phase\": \"\"\r\n        },\r\n        \"round\": {\r\n            \"phase\": \"over\"\r\n        }\r\n    },\r\n    \"player\": {\r\n        \"team\": \"T\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
