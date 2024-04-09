@@ -41,11 +41,3 @@ def find_team_button(team):
 
 def format_strat(strat):
     return "# {}\n{}".format(strat["title"], strat["desc"])
-
-
-if __name__ == "__main__":
-    for i in range(10):
-        strat = get_strat("dust2", "T")
-        print(strat)
-
-    driver.quit()
