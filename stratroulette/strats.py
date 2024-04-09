@@ -1,5 +1,3 @@
-import configparser
-
 from selenium import webdriver
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -11,12 +9,8 @@ options.add_argument("--headless=new")
 driver = webdriver.Chrome(options=options)
 driver.get("https://strat-roulette.github.io")
 
-config = configparser.ConfigParser()
-config.read("../config.ini")
-gsi_token = config.get("GSI", "token")
 
-
-def get_strat_if_freezetime(data):
+def get_strat_if_freezetime(data, gsi_token):
     if verify_token(data, gsi_token) and is_freezetime(data):
         mapp = get_map(data)
         team = get_team(data)

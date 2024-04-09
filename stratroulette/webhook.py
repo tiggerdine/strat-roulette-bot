@@ -8,11 +8,12 @@ from stratroulette.strats import get_strat_if_freezetime
 
 config = configparser.ConfigParser()
 config.read("../config.ini")
+webhook_id = config.getint("Webhook", "id")
+webhook_token = config.get("Webhook", "token", vars=os.environ)
+gsi_token = config.get("GSI", "token")
 
 app = Flask(__name__)
 
-webhook_id = config.getint("Webhook", "id")
-webhook_token = config.get("Webhook", "token", vars=os.environ)
 webhook = SyncWebhook.partial(webhook_id, webhook_token)
 
 

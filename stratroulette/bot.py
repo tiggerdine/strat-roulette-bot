@@ -12,6 +12,8 @@ nest_asyncio.apply()
 
 config = configparser.ConfigParser()
 config.read("../config.ini")
+bot_token = config.get("Bot", "token", vars=os.environ)
+gsi_token = config.get("GSI", "token")
 
 app = Flask(__name__)
 
@@ -19,7 +21,7 @@ app = Flask(__name__)
 @app.post("/")
 async def _():
     data = request.get_json()
-    strat = get_strat_if_freezetime(data)
+    strat = get_strat_if_freezetime(data, gsi_token)
     if strat:
         bot.loop.run_until_complete(bot.send(strat))
     return ""
@@ -35,9 +37,8 @@ class StratRouletteBot(discord.Client):
 
 
 bot = StratRouletteBot(intents=discord.Intents.default())
-token = config.get("Bot", "token", vars=os.environ)
 
-t1 = Thread(target=lambda: bot.run(token))
+t1 = Thread(target=lambda: bot.run(bot_token))
 t2 = Thread(target=lambda: app.run())
 
 if __name__ == "__main__":
