@@ -1,19 +1,13 @@
-import configparser
-import os
 from threading import Thread
 
 import discord
 import nest_asyncio
 from flask import Flask, request
 
+from stratroulette.config import bot_token, gsi_token
 from stratroulette.strats import get_strat_if_freezetime
 
 nest_asyncio.apply()
-
-config = configparser.ConfigParser()
-config.read("../config.ini")
-bot_token = config.get("Bot", "token", vars=os.environ)
-gsi_token = config.get("GSI", "token")
 
 app = Flask(__name__)
 
