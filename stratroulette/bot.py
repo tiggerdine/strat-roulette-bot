@@ -1,7 +1,7 @@
 from threading import Thread
 
-import discord
 import nest_asyncio
+from discord import Client, Intents, FFmpegPCMAudio
 from flask import Flask, request
 
 from stratroulette.config import bot_token, gsi_token
@@ -22,16 +22,27 @@ async def _():
     return ""
 
 
-class StratRouletteBot(discord.Client):
+class StratRouletteBot(Client):
     async def on_ready(self):
         await self.send("Let's play Strat Roulette!")
+        await self.play("https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample.mp3")
 
     async def send(self, msg):
         channel = self.get_channel(1217427654098026600)
         await channel.send(msg)
 
+    async def play(self, source):
+        channel = self.get_channel(1217427654098026601)
+        voice_channel = await channel.connect()
+        voice_channel.play(
+            FFmpegPCMAudio(
+                executable="C:/Users/Martin/Downloads/ffmpeg-2024-04-18-git-35ae44c615-essentials_build/bin/ffmpeg.exe",
+                source=source,
+            )
+        )
 
-bot = StratRouletteBot(intents=discord.Intents.default())
+
+bot = StratRouletteBot(intents=Intents.default())
 
 
 def get_strat_if_freezetime(data, token):
