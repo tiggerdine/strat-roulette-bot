@@ -17,8 +17,8 @@ app = Flask(__name__)
 @app.post("/")
 async def _():
     data = request.get_json()
-    bot.loop.run_until_complete(process(data))
-    return ""
+    bot.loop.create_task(process(data))
+    return "", 202
 
 
 # endregion
