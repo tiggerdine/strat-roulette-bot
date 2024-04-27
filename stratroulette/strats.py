@@ -8,7 +8,7 @@ driver = webdriver.Chrome(options=options)
 driver.get("https://strat-roulette.github.io")
 
 
-def get_strat(mapp, team):
+def generate_strat(mapp, team):
     try:
         find_map_button(mapp).click()
     except NoSuchElementException:
