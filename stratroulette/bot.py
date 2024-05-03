@@ -4,13 +4,13 @@ import nest_asyncio
 from discord import Client, Intents, FFmpegPCMAudio
 from flask import Flask, request
 
-from stratroulette.config import BOT_TOKEN, GSI_TOKEN
+from stratroulette.config import BOT_TOKEN, CHANNEL_ID, GSI_TOKEN
 from stratroulette.gsi import verify_token, is_freezetime, get_map, get_team
 from stratroulette.strats import generate_strat
 
 nest_asyncio.apply()
 
-# region {Flask app}
+# region {Flask app...}
 app = Flask(__name__)
 
 
@@ -24,12 +24,12 @@ async def _():
 # endregion
 
 
-# region {Discord bot}
+# region {Discord bot...}
 class StratRouletteBot(Client):
     channel = voice_client = None
 
     async def on_ready(self):
-        self.channel = self.get_channel(1217427654098026601)
+        self.channel = self.get_channel(CHANNEL_ID)
         self.voice_client = await self.channel.connect()
         await self.send("Let's play Strat Roulette!")
         await self.play(
