@@ -4,7 +4,7 @@ import nest_asyncio
 from discord import Client, Intents, FFmpegPCMAudio
 from flask import Flask, request
 
-from stratroulette.config import BOT_TOKEN, CHANNEL_ID, GSI_TOKEN
+from stratroulette.config import BOT_TOKEN, CHANNEL_ID, GSI_TOKEN, FFMPEG_EXE
 from stratroulette.gsi import verify_token, is_freezetime, get_map, get_team
 from stratroulette.strats import generate_strat
 
@@ -42,7 +42,7 @@ class StratRouletteBot(Client):
     async def play(self, source):
         self.voice_client.play(
             FFmpegPCMAudio(
-                executable="C:/Users/Martin/Downloads/ffmpeg-2024-04-18-git-35ae44c615-essentials_build/bin/ffmpeg.exe",
+                executable=FFMPEG_EXE,
                 source=source,
             )
         )
