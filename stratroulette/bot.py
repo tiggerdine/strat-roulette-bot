@@ -7,6 +7,7 @@ from flask import Flask, request
 from stratroulette.config import BOT_TOKEN, CHANNEL_ID, GSI_TOKEN, FFMPEG_EXE
 from stratroulette.gsi import GsiData
 from stratroulette.strats import generate_strat
+from stratroulette.tts import generate
 
 nest_asyncio.apply()
 
@@ -32,9 +33,6 @@ class StratRouletteBot(Client):
         self.channel = self.get_channel(CHANNEL_ID)
         self.voice_client = await self.channel.connect()
         await self.send("Let's play Strat Roulette!")
-        await self.play(
-            "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample.mp3"
-        )
 
     async def send(self, msg):
         await self.channel.send(msg)
@@ -60,8 +58,8 @@ async def process(json):
 
     if data.is_freezetime():
         strat = get_strat(data)
-        formatted_strat = format_strat(strat)
-        await bot.send(formatted_strat)
+        await send_text(strat)
+        await play_speech(strat)
     # TODO elif is_new_game(data):
 
 
@@ -71,8 +69,15 @@ def get_strat(data):
     return generate_strat(mapp, team)
 
 
-def format_strat(strat):
-    return f"# {strat['title']}\n{strat['desc']}"
+async def send_text(strat):
+    text_strat = f"# {strat['title']}\n{strat['desc']}"
+    await bot.send(text_strat)
+
+
+async def play_speech(strat):
+    voice_strat = f"{strat['title']}!\n{strat['desc']}"
+    speech = generate(voice_strat)
+    await bot.play(speech)
 
 
 if __name__ == "__main__":
