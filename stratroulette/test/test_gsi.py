@@ -1,12 +1,12 @@
 import unittest
 
-from stratroulette.gsi import is_freezetime, get_map, get_team, verify_token
+from stratroulette.gsi import GsiData
 
 
 class TestIsFreezetime(unittest.TestCase):
     def test_is_long_freezetime(self):
         # given
-        datas = [
+        jsons = [
             {
                 "map": {"phase": "live"},
                 "round": {"phase": "freezetime"},
@@ -20,12 +20,13 @@ class TestIsFreezetime(unittest.TestCase):
         ]
 
         # when/then
-        for data in datas:
-            self.assertTrue(is_freezetime(data))
+        for json in jsons:
+            data = GsiData(json)
+            self.assertTrue(data.is_freezetime())
 
     def test_is_not_long_freezetime(self):
         # given
-        datas = [
+        jsons = [
             {
                 "map": {"phase": "bla"},  # Wrong map.phase
                 "round": {"phase": "freezetime"},
@@ -50,23 +51,25 @@ class TestIsFreezetime(unittest.TestCase):
         ]
 
         # when/then
-        for data in datas:
-            self.assertFalse(is_freezetime(data))
+        for json in jsons:
+            data = GsiData(json)
+            self.assertFalse(data.is_freezetime())
 
     def test_is_short_freezetime(self):
         # given
-        data = {
+        json = {
             "map": {"phase": "live"},
             "round": {"phase": "freezetime"},
             "previously": {"round": {"phase": "over"}},
         }
 
         # when/then
-        self.assertTrue(is_freezetime(data))
+        data = GsiData(json)
+        self.assertTrue(data.is_freezetime())
 
     def test_is_not_short_freezetime(self):
         # given
-        datas = [
+        jsons = [
             {
                 "map": {"phase": "bla"},  # Wrong map.phase
                 "round": {"phase": "freezetime"},
@@ -93,8 +96,9 @@ class TestIsFreezetime(unittest.TestCase):
         ]
 
         # when/then
-        for data in datas:
-            self.assertFalse(is_freezetime(data))
+        for json in jsons:
+            data = GsiData(json)
+            self.assertFalse(data.is_freezetime())
 
 
 class TestGetMap(unittest.TestCase):
@@ -104,23 +108,27 @@ class TestGetMap(unittest.TestCase):
             "de_cache": "cache",
             "de_inferno": "inferno",
         }.items():
-            self.assertEqual(mapp, get_map({"map": {"name": de_map}}))
+            data = GsiData({"map": {"name": de_map}})
+            self.assertEqual(mapp, data.get_map())
 
 
 class TestGetTeam(unittest.TestCase):
     def test_get_team(self):
         for team in ["CT", "T"]:
-            self.assertEqual(team, get_team({"player": {"team": team}}))
+            data = GsiData({"player": {"team": team}})
+            self.assertEqual(team, data.get_team())
 
 
 class TestVerifyToken(unittest.TestCase):
     def test_verify_token(self):
         for token in ["abc", "def"]:
-            self.assertTrue(verify_token({"auth": {"token": token}}, token))
+            data = GsiData({"auth": {"token": token}})
+            self.assertTrue(data.verify_token(token))
 
     def test_do_not_verify_token(self):
-        for data in [{"auth": {"token": "def"}}, {"auth": {}}, {}]:
-            self.assertFalse(verify_token(data, "abc"))
+        for json in [{"auth": {"token": "def"}}, {"auth": {}}, {}]:
+            data = GsiData(json)
+            self.assertFalse(data.verify_token("abc"))
 
 
 if __name__ == "__main__":
