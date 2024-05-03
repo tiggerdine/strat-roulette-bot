@@ -13,3 +13,6 @@ GSI_TOKEN = config.get("GSI", "token")
 
 # FFmpeg
 FFMPEG_EXE = config.get("FFmpeg", "exe")
+
+# TTS
+TTS = config.get("TTS", "tts")

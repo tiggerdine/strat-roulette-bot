@@ -1,4 +1,5 @@
 discord.py[voice]==2.3.2
+elevenlabs==1.2.1
 flask[async]==3.0.2
 nest_asyncio==1.6.0
 pyttsx3==2.90
