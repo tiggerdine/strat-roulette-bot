@@ -5,7 +5,7 @@ from discord import Client, Intents, FFmpegPCMAudio
 from flask import Flask, request
 
 from stratroulette.config import BOT_TOKEN, CHANNEL_ID, GSI_TOKEN, FFMPEG_EXE
-from stratroulette.gsi import verify_token, is_freezetime, get_map, get_team
+from stratroulette.gsi import GsiData
 from stratroulette.strats import generate_strat
 
 nest_asyncio.apply()
@@ -16,8 +16,8 @@ app = Flask(__name__)
 
 @app.post("/")
 async def _():
-    data = request.get_json()
-    bot.loop.create_task(process(data))
+    json = request.get_json()
+    bot.loop.create_task(process(json))
     return "", 202
 
 
@@ -52,11 +52,13 @@ bot = StratRouletteBot(intents=Intents.default())
 # endregion
 
 
-async def process(data):
-    if not verify_token(data, GSI_TOKEN):
+async def process(json):
+    data = GsiData(json)
+
+    if not data.verify_token(GSI_TOKEN):
         return
 
-    if is_freezetime(data):
+    if data.is_freezetime():
         strat = get_strat(data)
         formatted_strat = format_strat(strat)
         await bot.send(formatted_strat)
@@ -64,8 +66,8 @@ async def process(data):
 
 
 def get_strat(data):
-    mapp = get_map(data)
-    team = get_team(data)
+    mapp = data.get_map()
+    team = data.get_team()
     return generate_strat(mapp, team)
 
 
