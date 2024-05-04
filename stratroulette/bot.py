@@ -5,7 +5,7 @@ from discord import Client, Intents, FFmpegPCMAudio
 from flask import Flask, request
 
 from stratroulette.config import BOT_TOKEN, CHANNEL_ID, GSI_TOKEN, FFMPEG_EXE
-from stratroulette.gsi import GsiData
+from stratroulette.gsi import Data
 from stratroulette.strats import generate_strat
 from stratroulette.tts import generate
 
@@ -32,12 +32,11 @@ class StratRouletteBot(Client):
     async def on_ready(self):
         self.channel = self.get_channel(CHANNEL_ID)
         self.voice_client = await self.channel.connect()
-        await self.send("Let's play Strat Roulette!")
 
-    async def send(self, msg):
-        await self.channel.send(msg)
+    async def send(self, content):
+        await self.channel.send(content)
 
-    async def play(self, source):
+    def play(self, source):
         self.voice_client.play(
             FFmpegPCMAudio(
                 executable=FFMPEG_EXE,
@@ -51,22 +50,20 @@ bot = StratRouletteBot(intents=Intents.default())
 
 
 async def process(json):
-    data = GsiData(json)
+    data = Data(json)
 
     if not data.verify_token(GSI_TOKEN):
         return
 
     if data.is_freezetime():
-        strat = get_strat(data)
+        strat = generate_strat(data.get_map(), data.get_team())
         await send_text(strat)
-        await play_speech(strat)
-    # TODO elif is_new_game(data):
+        play_speech(strat)
 
-
-def get_strat(data):
-    mapp = data.get_map()
-    team = data.get_team()
-    return generate_strat(mapp, team)
+    elif data.is_new_game():
+        await bot.send("Let's play Strat Roulette!")
+        speech = generate("Let's play Strat Roulette!")
+        bot.play(speech)
 
 
 async def send_text(strat):
@@ -74,10 +71,10 @@ async def send_text(strat):
     await bot.send(text_strat)
 
 
-async def play_speech(strat):
+def play_speech(strat):
     voice_strat = f"{strat['title']}!\n{strat['desc']}"
     speech = generate(voice_strat)
-    await bot.play(speech)
+    bot.play(speech)
 
 
 if __name__ == "__main__":

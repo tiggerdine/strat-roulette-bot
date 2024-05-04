@@ -1,8 +1,8 @@
-class GsiData:
-    data = None
+class Data:
+    json = None
 
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, json):
+        self.json = json
 
     def is_freezetime(self):
         return self.is_long_freezetime() or self.is_short_freezetime()
@@ -10,9 +10,9 @@ class GsiData:
     def is_long_freezetime(self):
         try:
             if (
-                self.data["map"]["phase"] == "live"
-                and self.data["round"]["phase"] == "freezetime"
-                and self.data["previously"]["map"]["phase"]
+                self.json["map"]["phase"] == "live"
+                and self.json["round"]["phase"] == "freezetime"
+                and self.json["previously"]["map"]["phase"]
                 in ["warmup", "intermission"]
             ):
                 return True
@@ -22,23 +22,27 @@ class GsiData:
     def is_short_freezetime(self):
         try:
             if (
-                self.data["map"]["phase"] == "live"
-                and self.data["round"]["phase"] == "freezetime"
-                and self.data["previously"]["round"]["phase"] == "over"
+                self.json["map"]["phase"] == "live"
+                and self.json["round"]["phase"] == "freezetime"
+                and self.json["previously"]["round"]["phase"] == "over"
             ):
                 return True
         except KeyError:
             pass
 
     def get_map(self):
-        return str(self.data["map"]["name"]).removeprefix("de_")
+        return str(self.json["map"]["name"]).removeprefix("de_")
 
     def get_team(self):
-        return self.data["player"]["team"]
+        return self.json["player"]["team"]
 
     def verify_token(self, token):
         try:
-            if self.data["auth"]["token"] == token:
+            if self.json["auth"]["token"] == token:
                 return True
         except KeyError:
             pass
+
+    def is_new_game(self):
+        """TODO"""
+        return False

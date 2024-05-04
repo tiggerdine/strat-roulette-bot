@@ -1,6 +1,6 @@
 import unittest
 
-from stratroulette.gsi import GsiData
+from stratroulette.gsi import Data
 
 
 class TestIsFreezetime(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestIsFreezetime(unittest.TestCase):
 
         # when/then
         for json in jsons:
-            data = GsiData(json)
+            data = Data(json)
             self.assertTrue(data.is_freezetime())
 
     def test_is_not_long_freezetime(self):
@@ -52,7 +52,7 @@ class TestIsFreezetime(unittest.TestCase):
 
         # when/then
         for json in jsons:
-            data = GsiData(json)
+            data = Data(json)
             self.assertFalse(data.is_freezetime())
 
     def test_is_short_freezetime(self):
@@ -64,7 +64,7 @@ class TestIsFreezetime(unittest.TestCase):
         }
 
         # when/then
-        data = GsiData(json)
+        data = Data(json)
         self.assertTrue(data.is_freezetime())
 
     def test_is_not_short_freezetime(self):
@@ -97,7 +97,7 @@ class TestIsFreezetime(unittest.TestCase):
 
         # when/then
         for json in jsons:
-            data = GsiData(json)
+            data = Data(json)
             self.assertFalse(data.is_freezetime())
 
 
@@ -108,26 +108,26 @@ class TestGetMap(unittest.TestCase):
             "de_cache": "cache",
             "de_inferno": "inferno",
         }.items():
-            data = GsiData({"map": {"name": de_map}})
+            data = Data({"map": {"name": de_map}})
             self.assertEqual(mapp, data.get_map())
 
 
 class TestGetTeam(unittest.TestCase):
     def test_get_team(self):
         for team in ["CT", "T"]:
-            data = GsiData({"player": {"team": team}})
+            data = Data({"player": {"team": team}})
             self.assertEqual(team, data.get_team())
 
 
 class TestVerifyToken(unittest.TestCase):
     def test_verify_token(self):
         for token in ["abc", "def"]:
-            data = GsiData({"auth": {"token": token}})
+            data = Data({"auth": {"token": token}})
             self.assertTrue(data.verify_token(token))
 
     def test_do_not_verify_token(self):
         for json in [{"auth": {"token": "def"}}, {"auth": {}}, {}]:
-            data = GsiData(json)
+            data = Data(json)
             self.assertFalse(data.verify_token("abc"))
 
 

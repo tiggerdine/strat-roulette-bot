@@ -6,6 +6,8 @@ from stratroulette.strats import driver, find_map_button, find_team_button
 
 
 class Test(unittest.TestCase):
+    """TODO Rename"""
+
     def test_maps(self):
         maps = [
             "mirage",
