@@ -60,11 +60,6 @@ async def process(json):
         await send_text(strat)
         play_speech(strat)
 
-    elif data.is_new_game():
-        await bot.send("Let's play Strat Roulette!")
-        speech = generate("Let's play Strat Roulette!")
-        bot.play(speech)
-
 
 async def send_text(strat):
     text_strat = f"# {strat['title']}\n{strat['desc']}"

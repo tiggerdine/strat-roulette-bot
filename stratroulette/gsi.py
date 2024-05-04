@@ -42,7 +42,3 @@ class Data:
                 return True
         except KeyError:
             pass
-
-    def is_new_game(self):
-        """TODO"""
-        return False
