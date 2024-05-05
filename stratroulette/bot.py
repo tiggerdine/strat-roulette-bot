@@ -5,7 +5,7 @@ from threading import Thread
 from discord import Client, Intents, FFmpegPCMAudio
 from flask import Flask, request
 
-from stratroulette.config import BOT_TOKEN, CHANNEL_ID, GSI_TOKEN, FFMPEG_EXE
+from stratroulette.config import BOT_TOKEN, CHANNEL_ID, GSI_TOKEN, GSI_PORT, FFMPEG_EXE
 from stratroulette.gsi import Data
 from stratroulette.strats import generate_strat
 from stratroulette.tts import generate
@@ -73,7 +73,7 @@ def play_strat(strat, wait_for_team_intro):
 
 if __name__ == "__main__":
     t1 = Thread(target=lambda: bot.run(BOT_TOKEN))
-    t2 = Thread(target=lambda: app.run())
+    t2 = Thread(target=lambda: app.run(port=GSI_PORT))
 
     t1.start()
     t2.start()
