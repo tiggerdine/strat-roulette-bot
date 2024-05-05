@@ -123,12 +123,12 @@ class TestVerifyToken(unittest.TestCase):
     def test_verify_token(self):
         for token in ["abc", "def"]:
             data = Data({"auth": {"token": token}})
-            self.assertTrue(data.verify_token(token))
+            self.assertTrue(data.has_token(token))
 
     def test_do_not_verify_token(self):
         for json in [{"auth": {"token": "def"}}, {"auth": {}}, {}]:
             data = Data(json)
-            self.assertFalse(data.verify_token("abc"))
+            self.assertFalse(data.has_token("abc"))
 
 
 if __name__ == "__main__":

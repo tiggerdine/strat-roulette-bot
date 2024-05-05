@@ -1,3 +1,4 @@
+import time
 from threading import Thread
 
 import nest_asyncio
@@ -16,7 +17,7 @@ app = Flask(__name__)
 
 
 @app.post("/")
-async def _():
+def _():
     json = request.get_json()
     bot.loop.create_task(process(json))
     return "", 202
@@ -52,23 +53,23 @@ bot = StratRouletteBot(intents=Intents.default())
 async def process(json):
     data = Data(json)
 
-    if not data.verify_token(GSI_TOKEN):
+    if not data.has_token(GSI_TOKEN):
         return
 
     if data.is_freezetime():
         strat = generate_strat(data.get_map(), data.get_team())
-        await send_text(strat)
-        play_speech(strat)
+        await send_strat(strat)
+        play_strat(strat, data.is_long_freezetime())
 
 
-async def send_text(strat):
-    text_strat = f"# {strat['title']}\n{strat['desc']}"
-    await bot.send(text_strat)
+async def send_strat(strat):
+    await bot.send(f"# {strat['title']}\n{strat['desc']}")
 
 
-def play_speech(strat):
-    voice_strat = f"{strat['title']}!\n{strat['desc']}"
-    speech = generate(voice_strat)
+def play_strat(strat, wait_for_team_intro):
+    speech = generate(f"{strat['title']}!\n{strat['desc']}")
+    if wait_for_team_intro:
+        time.sleep(7)
     bot.play(speech)
 
 

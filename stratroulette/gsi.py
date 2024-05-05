@@ -36,7 +36,7 @@ class Data:
     def get_team(self):
         return self.json["player"]["team"]
 
-    def verify_token(self, token):
+    def has_token(self, token):
         try:
             if self.json["auth"]["token"] == token:
                 return True
