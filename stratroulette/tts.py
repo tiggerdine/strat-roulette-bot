@@ -1,6 +1,6 @@
-from stratroulette.config import TTS
+from stratroulette.config import TTS, ELEVEN_API_KEY
 
-FILENAME = ".speech"
+FILENAME = "speech.mp3"
 
 if TTS == "pyttsx3":
     import pyttsx3
@@ -15,7 +15,7 @@ elif TTS == "elevenlabs":
     from elevenlabs.client import ElevenLabs
     from elevenlabs import save
 
-    client = ElevenLabs()
+    client = ElevenLabs(api_key=ELEVEN_API_KEY)
 
     def _generate(text):
         audio = client.generate(text=text)

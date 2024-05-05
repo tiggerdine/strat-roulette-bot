@@ -16,3 +16,4 @@ FFMPEG_EXE = config.get("FFmpeg", "exe")
 
 # TTS
 TTS = config.get("TTS", "tts")
+ELEVEN_API_KEY = config.get("TTS", "eleven_api_key", vars=os.environ)
