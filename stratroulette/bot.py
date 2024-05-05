@@ -1,7 +1,7 @@
+import asyncio
 import time
 from threading import Thread
 
-import nest_asyncio
 from discord import Client, Intents, FFmpegPCMAudio
 from flask import Flask, request
 
@@ -10,8 +10,6 @@ from stratroulette.gsi import Data
 from stratroulette.strats import generate_strat
 from stratroulette.tts import generate
 
-nest_asyncio.apply()
-
 # region {Flask app...}
 app = Flask(__name__)
 
@@ -19,7 +17,7 @@ app = Flask(__name__)
 @app.post("/")
 def _():
     json = request.get_json()
-    bot.loop.create_task(process(json))
+    asyncio.run_coroutine_threadsafe(process(json), bot.loop)
     return "", 202
 
 
