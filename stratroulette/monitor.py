@@ -5,10 +5,9 @@ from selenium.webdriver.common.by import By
 from stratroulette.strats import driver, find_map_button, find_team_button
 
 
-class Test(unittest.TestCase):
-    """TODO Rename"""
+class MonitorStratRouletteGithubIo(unittest.TestCase):
 
-    def test_maps(self):
+    def test_monitor_maps(self):
         maps = [
             "mirage",
             "cache",
@@ -26,7 +25,7 @@ class Test(unittest.TestCase):
         for mapp in maps:
             find_map_button(mapp)
 
-    def test_teams(self):
+    def test_monitor_teams(self):
         teams = ["CT", "T"]
 
         team_btns = driver.find_elements(By.TAG_NAME, "button")
