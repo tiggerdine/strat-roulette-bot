@@ -5,7 +5,7 @@ from threading import Thread
 from discord import Client, Intents, FFmpegPCMAudio
 from flask import Flask, request
 
-from stratroulette.config import BOT_TOKEN, CHANNEL_ID, GSI_TOKEN, GSI_PORT, FFMPEG_EXE
+from stratroulette.config import BOT_TOKEN, GSI_TOKEN, GSI_PORT, FFMPEG_EXE
 from stratroulette.gsi import Data
 from stratroulette.strats import generate_strat
 from stratroulette.tts import generate
@@ -29,8 +29,16 @@ class StratRouletteBot(Client):
     channel = voice_client = None
 
     async def on_ready(self):
-        self.channel = self.get_channel(CHANNEL_ID)
+        channel_id = self.find_channel()
+        self.channel = self.get_channel(channel_id)
         self.voice_client = await self.channel.connect()
+
+    def find_channel(self):
+        owner_id = self.application.owner.id
+        for member in self.get_all_members():
+            if member.id == owner_id:
+                return member.voice.channel.id
+        raise RuntimeError("You are not in a voice channel")
 
     async def send(self, content):
         await self.channel.send(content)
