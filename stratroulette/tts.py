@@ -1,6 +1,6 @@
 from stratroulette.config import TTS, ELEVEN_API_KEY
 
-FILENAME = "speech.mp3"
+FILENAME = ".speech"
 
 if TTS == "pyttsx3":
     import pyttsx3
