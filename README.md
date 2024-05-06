@@ -54,7 +54,6 @@ Join a voice channel and run `bot.py`.
 * Add a configuration UI.
 * Bundle everything into a single exe.
 * Support different voices.
-* ???
 
 # Resources
 
