@@ -59,7 +59,7 @@ Join a voice channel and run `bot.py`.
 
 I used the [Valve Developer Community](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration) and [Bkid's Reddit post](https://www.reddit.com/r/GlobalOffensive/comments/cjhcpy/game_state_integration_a_very_large_and_indepth/) to learn about GSI.
 
-The [Python docs](https://docs.python.org/3/) and [PyPI](https://pypi.org/)
+The [Python docs](https://docs.python.org/3/) and [PyPI](https://pypi.org/) were helpful.
 
 ## License
 
