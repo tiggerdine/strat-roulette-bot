@@ -3,12 +3,22 @@
 <details>
   <summary>A Discord bot for playing Strat Roulette in CS:GO/CS2.</summary>
 
-  ...
+  Strat Roulette is an alternative way to play Counter-Strike that revolves around completing a different challenge every round. See [Jon Sandman's YouTube video](https://youtu.be/LgCC2TMRjB0?si=NNLmFQ-hbuzg6jmH) about it.
+
+  I wrote this bot as an experiment in Python, which I had barely used since uni. I wanted something that would let me play with a bunch of different libraries and be fun to use.
+
+  The bot:
+  * parses data from the game to detect when a new round is starting.
+  * scrapes a strat from [strat-roulette.github.io](https://strat-roulette.github.io/).
+  * uses text to speech to generate a recording of someone reading the strat aloud.
+  * sends and plays the strat in Discord.
 </details>
 
 ![bot](https://github.com/tiggerdine/strat-roulette-bot/assets/9384949/cfd8c372-b66a-47e4-8734-7dbbf027cfe1)
 
 ## Setup
+
+(Have the latest version of Python.)
 
 Copy `gamestate_integration_stratroulette.cfg` to your game's config folder (`C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg`).
 
@@ -43,9 +53,10 @@ Join a voice channel and run `bot.py`.
 
 ## Future work
 
-* ...
-* ...
-* ...
+* Add a configuration UI.
+* Bundle everything into a single exe.
+* Support different voices.
+* ???
 
 # Resources
 
