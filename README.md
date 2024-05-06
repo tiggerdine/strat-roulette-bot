@@ -6,7 +6,7 @@ A Discord bot for playing Strat Roulette in CS:GO/CS2.</summary>
 
 Strat Roulette is an alternative way to play Counter-Strike that revolves around completing a different challenge every round. See [Jon Sandman's YouTube video](https://youtu.be/LgCC2TMRjB0?si=NNLmFQ-hbuzg6jmH) about it.
 
-I wrote this bot as an experiment in Python, which I had barely used since uni. I wanted something that would let me play with a bunch of different libraries and be fun to use.
+I wrote this bot as an experiment in Python, which I had barely used since uni. I wanted something that would let me play with a bunch of different libraries, and be fun to use.
 
 The bot:
 * parses data from the game to detect when a new round is starting.
