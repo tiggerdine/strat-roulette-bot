@@ -2,5 +2,5 @@ discord.py[voice]==2.3.2
 elevenlabs==1.2.1
 flask==3.0.3
 pyttsx3==2.90
-requests==2.31.0
+requests==2.32.0
 selenium==4.20.0
