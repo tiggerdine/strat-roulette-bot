@@ -1,6 +1,6 @@
-discord.py[voice]==2.3.2
-elevenlabs==1.2.2
+discord.py[voice]==2.4.0
+elevenlabs==1.6.1
 flask==3.0.3
 pyttsx3==2.90
 requests==2.32.3
-selenium==4.21.0
+selenium==4.23.1
